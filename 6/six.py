@@ -1,4 +1,4 @@
-print("Welcome to Day 5!")
+print("Welcome to Day 6!")
 
 from collections import defaultdict
 import time
