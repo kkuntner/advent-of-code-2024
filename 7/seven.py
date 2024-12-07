@@ -33,6 +33,10 @@ def checkRow(result, numbers):
                 currentsum += numbers[j+1]
             else:   
                 currentsum *= numbers[j+1]
+            
+            if currentsum > result:
+                break
+
         if currentsum == result:
             sum += result
             found = True
@@ -89,6 +93,10 @@ def do2(rows):
                     currentsum += numbers[j+1]
                 else:   
                     currentsum *= numbers[j+1]  
+                # if we are larger than the result, no need to continue
+                if currentsum > result:
+                    break
+            
             if currentsum == result:
                 sum += result
                 found = True
