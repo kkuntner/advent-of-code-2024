@@ -89,7 +89,7 @@ def do1(map, sx, sy, fx, fy):
 
     return -1
 
-def do2(map, sx, sy, fx, fy):
+def do2(map, sx, sy, fx, fy, mincost):
     sizex = len(map[0])
     sizey = len(map)
 
@@ -114,6 +114,14 @@ def do2(map, sx, sy, fx, fy):
 
         if cost > mincost:
             continue
+
+        # THIS WAS the fix that made it work fast enough :)
+        # Check if already visited with a lower or equal cost for this direction
+        if (x, y, predvir) in visited and visited[(x, y, predvir)] < cost:
+            continue
+
+        visited[(x, y, predvir)] = cost
+
 
         # if we are at the end
         if x == fx and y == fy:
@@ -180,7 +188,7 @@ t2 = time.time()
 # print(f"elapsed time: {(t2-t1)} seconds")
 
 t1 = time.time()
-cost, paths = do2(map, sx, sy, fx, fy)
+cost, paths = do2(map, sx, sy, fx, fy, total)
 
 assert cost == total
 
@@ -190,6 +198,8 @@ count = len(set([item for sublist in paths for item in sublist]))
 
 #print_maze(map, paths)
 print(f"Total count: {count}")
+# 417?  no, higher...
+# 442?
 
 t2 = time.time()
 

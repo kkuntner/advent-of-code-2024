@@ -104,6 +104,20 @@ def do2(machines):
 
     print(f"total: {total}")
 
+def do2good(machines: list[machine]):
+    total = 0
+    offset = 10000000000000
+    # that is 10 000 000 000 000
+
+    for m in machines:
+        b = (m.ax * (m.ry + offset) - m.ay*(m.rx + offset)) / (m.by*m.ax-m.ay*m.bx)
+        a = ((m.rx + offset) - m.bx*b) / m.ax
+
+        if b == int(b) and a == int(a):
+            total += 3*a + b       
+
+        
+    print(f"total: {total}")
 
 # still have to figure out how to look for local file in VS Code :(
 input_file = r'd:\OneDrive\Documents\Projects\AoC\2024\advent-of-code-2024\13\input.txt'   
@@ -117,7 +131,8 @@ t2 = time.time()
 print(f"elapsed time: {(t2-t1)} seconds")
 
 t1 = time.time()
-regions = do2(rules)
+regions = do2good(rules)
+# 80882098756071 is the right answer
 t2 = time.time()
 
 print(f"elapsed time: {(t2-t1)} seconds")
